@@ -34,7 +34,7 @@ public class CaseMenu {
             System.out.println("5. Filter Cases by Region");
             System.out.println("6. Filter Cases by Urgency");
             System.out.println("7. Sort Cases by Urgency");
-            System.out.println("8. View Case Queue");
+            System.out.println("8. View New Cases");   //cases added in this session
             System.out.println("0. Back to Main Menu");
             System.out.print("Select: ");
             String choice = scanner.nextLine();
