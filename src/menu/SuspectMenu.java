@@ -11,6 +11,7 @@ public class SuspectMenu {
     private static final Scanner scanner = new Scanner(System.in);
     private static SuspectService suspectService;
 
+
     static {
         try {
             suspectService = new SuspectService();
@@ -25,7 +26,7 @@ public class SuspectMenu {
             System.out.println("\n--- Suspect Menu ---");
             System.out.println("1. Add Suspect");
             System.out.println("2. View All Suspects");
-            System.out.println("3. Search Suspect by Name or Alias");
+            System.out.println("3. Search Suspect by Name, Alias, or Crime Type");
             System.out.println("4. Update Suspect");
             System.out.println("5. Delete Suspect");
             System.out.println("6. Back to Main Menu");
@@ -66,9 +67,10 @@ public class SuspectMenu {
             String age = scanner.nextLine();
             System.out.print("Description: ");
             String description = scanner.nextLine();
+            System.out.print("Crime Type: ");
+            String crimeType = scanner.nextLine();
 
-
-            Suspect suspect = new Suspect(name, alias, age, description);
+            Suspect suspect = new Suspect(name, alias, age, description, crimeType);
             boolean success = suspectService.addSuspect(suspect);
             System.out.println(success ? "Suspect added successfully." : "Failed to add suspect.");
         } catch (Exception e) {
@@ -88,7 +90,7 @@ public class SuspectMenu {
                     System.out.println("Alias: " + s.getAlias());
                     System.out.println("Age: " + s.getAge());
                     System.out.println("Description: " + s.getDescription());
-
+                    System.out.println("Crime Type: " + s.getCrimeType());
                 }
             }
         } catch (Exception e) {
@@ -98,7 +100,7 @@ public class SuspectMenu {
 
     private static void searchSuspect() {
         try {
-            System.out.print("Enter name or alias keyword: ");
+            System.out.print("Enter keyword (name, alias, or crime type): ");
             String keyword = scanner.nextLine();
             List<Suspect> results = suspectService.searchSuspects(keyword);
             if (results.isEmpty()) {
@@ -110,7 +112,7 @@ public class SuspectMenu {
                     System.out.println("Alias: " + s.getAlias());
                     System.out.println("Age: " + s.getAge());
                     System.out.println("Description: " + s.getDescription());
-
+                    System.out.println("Crime Type: " + s.getCrimeType());
                 }
             }
         } catch (Exception e) {
@@ -131,9 +133,10 @@ public class SuspectMenu {
             String age = scanner.nextLine();
             System.out.print("New Description: ");
             String description = scanner.nextLine();
+            System.out.print("New Crime Type: ");
+            String crimeType = scanner.nextLine();
 
-
-            Suspect updated = new Suspect(id, name, age, description, alias);
+            Suspect updated = new Suspect(id, name, alias, age, description, crimeType);
             boolean success = suspectService.updateSuspect(updated);
             System.out.println(success ? "Suspect updated successfully." : "Failed to update suspect.");
         } catch (Exception e) {

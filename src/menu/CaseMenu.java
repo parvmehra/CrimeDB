@@ -4,7 +4,7 @@ import dsa.CaseQueue;
 import dsa.CaseSorter;
 import models.Case;
 import service.CaseService;
-import service.GraphService;
+
 
 import java.sql.SQLException;
 import java.util.List;
@@ -14,7 +14,6 @@ public class CaseMenu {
     private static final Scanner scanner = new Scanner(System.in);
     private static CaseService caseService;
     private static final CaseQueue caseQueue = new CaseQueue();
-    private static final GraphService graphService = new GraphService();
 
 
     static {
@@ -34,9 +33,8 @@ public class CaseMenu {
             System.out.println("4. Delete Case");
             System.out.println("5. Filter Cases by Region");
             System.out.println("6. Filter Cases by Urgency");
-            System.out.println("7. View BFS Region Map");
-            System.out.println("8. Sort Cases by Urgency");
-            System.out.println("9. View Case Queue");
+            System.out.println("7. Sort Cases by Urgency");
+            System.out.println("8. View Case Queue");
             System.out.println("0. Back to Main Menu");
             System.out.print("Select: ");
             String choice = scanner.nextLine();
@@ -61,12 +59,9 @@ public class CaseMenu {
                     filterByUrgency();
                     break;
                 case "7":
-                    runBfs();
-                    break;
-                case "8":
                     sortByUrgency();
                     break;
-                case "9":
+                case "8":
                     viewCaseQueue();
                     break;
                 case "0":
@@ -96,7 +91,6 @@ public class CaseMenu {
         Case newCase = new Case(title, description, region, status, suspect, urgency, date);
         if (caseService.addCase(newCase)) {
             caseQueue.enqueue(newCase);
-            graphService.addConnection("HQ", region); // Add region to graph for BFS
             System.out.println("Case added and queued.");
         } else {
             System.out.println("Failed to add case.");
@@ -180,12 +174,6 @@ public class CaseMenu {
         for (Case c : cases) {
             System.out.println(c.getTitle() + " - " + c.getUrgency());
         }
-    }
-
-    private static void runBfs() {
-        System.out.print("Enter starting region (e.g., HQ): ");
-        String start = scanner.nextLine();
-        graphService.bfs(start);
     }
 
     private static void viewCaseQueue() {

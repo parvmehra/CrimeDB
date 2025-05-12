@@ -1,16 +1,21 @@
 package dsa;
 import models.Case;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 public class CaseSorter {
     public static void sortByUrgency(List<Case> cases) {
-        Collections.sort(cases, Comparator.comparing(Case::getUrgency));
+        cases.sort(Comparator.comparingInt(c -> {
+            switch (c.getUrgency().trim().toLowerCase()) {
+                case "high": return 0;
+                case "medium": return 1;
+                case "low": return 2;
+                default: return 3;
+            }
+        }));
+
+
     }
 
-    public static void sortByDate(List<Case> cases) {
-        Collections.sort(cases, Comparator.comparing(Case::getDate));
-    }
 
 }

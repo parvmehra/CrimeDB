@@ -1,3 +1,4 @@
+// Suspect.java
 package models;
 
 public class Suspect {
@@ -6,25 +7,28 @@ public class Suspect {
     private String alias;
     private String age;
     private String description;
+    private String crimeType; // Added crimeType field
 
-    public Suspect(int id, String name,String alias, String age, String description) {
+    // Constructor with all fields
+    public Suspect(int id, String name, String alias, String age, String description, String crimeType) {
         this.id = id;
         this.name = name;
         this.alias = alias;
         this.age = age;
         this.description = description;
+        this.crimeType = crimeType;
     }
 
-    //without id to insert new suspect
-    public Suspect(String name, String alias, String age, String description) {
+    // Constructor without ID for creating new suspect
+    public Suspect(String name, String alias, String age, String description, String crimeType) {
         this.name = name;
         this.alias = alias;
         this.age = age;
         this.description = description;
+        this.crimeType = crimeType;
     }
 
-
-
+    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -63,5 +67,13 @@ public class Suspect {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCrimeType() {
+        return crimeType;
+    }
+
+    public void setCrimeType(String crimeType) {
+        this.crimeType = crimeType;
     }
 }
